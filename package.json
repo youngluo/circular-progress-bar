@@ -1,0 +1,32 @@
+{
+  "name": "angularjs-components",
+  "version": "1.0.0",
+  "description": "Collect the angularjs components extracted from daily development",
+  "main": "src/index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youngluo/angularjs-components.git"
+  },
+  "keywords": [
+    "angularjs",
+    "component"
+  ],
+  "author": "Young Luo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/youngluo/angularjs-components/issues"
+  },
+  "homepage": "https://github.com/youngluo/angularjs-components#readme",
+  "devDependencies": {
+    "angular": "^1.6.7",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
+}
