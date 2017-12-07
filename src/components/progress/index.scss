@@ -1,5 +1,5 @@
 .circle-progress {
-    @color: #fe6e35;
+    $color: #fe6e35;
     position: relative;
     display: block;
     width: 130px;
@@ -32,13 +32,13 @@
             transition: transform .1s ease-in-out;
         }
         .right-circle {
-            border-top: 3px solid @color;
-            border-right: 3px solid @color;
+            border-top: 3px solid $color;
+            border-right: 3px solid $color;
             right: 0;
         }
         .left-circle {
-            border-bottom: 3px solid @color;
-            border-left: 3px solid @color;
+            border-bottom: 3px solid $color;
+            border-left: 3px solid $color;
             left: 0;
         }
     }

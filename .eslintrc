@@ -12,13 +12,23 @@
     "document": true,
     "navigator": true,
     "window": true,
-    "node": true
+    "node": true,
+    "angular": true
   },
   "extends": "airbnb-base/legacy",
-  "plugins": ["import"],
+  "plugins": [
+    "import"
+  ],
   // 定义自己的规则
   "rules": {
-    "comma-dangle": ["error", "never"],
-    "indent": ["error", 2]
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "global-require": "off"
   }
 }
