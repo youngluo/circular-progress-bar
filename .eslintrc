@@ -19,7 +19,6 @@
   "plugins": [
     "import"
   ],
-  // 定义自己的规则
   "rules": {
     "comma-dangle": [
       "error",
@@ -29,6 +28,7 @@
       "error",
       2
     ],
-    "global-require": "off"
+    "global-require": "off",
+    "class-methods-use-this": "off"
   }
 }

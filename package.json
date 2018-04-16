@@ -1,12 +1,11 @@
 {
-  "name": "bee",
+  "name": "circular-progress-bar",
   "version": "1.0.0",
   "description": "Collect the angularjs components extracted from daily development",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "rollup -c rollup.config.js",
-    "prod": "rollup -c rollup.config.js --environment build:production"
+    "dev:angularjs": "rollup -c rollup.config.js --environment type:angularjs",
+    "prod:angularjs": "rollup -c rollup.config.js --environment type:angularjs,build:production"
   },
   "repository": {
     "type": "git",
@@ -32,12 +31,16 @@
     "eslint": "^4.12.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "gulp": "^3.9.1",
+    "gulp-eagle": "^2.1.1",
     "node-sass": "^4.7.2",
     "rollup": "^0.52.1",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-conditional": "^1.1.1",
     "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-html": "^0.2.1",
     "rollup-plugin-license": "^0.5.0",
+    "rollup-plugin-multi-entry": "^2.0.2",
     "rollup-plugin-postcss": "^0.5.5",
     "rollup-plugin-serve": "^0.4.2",
     "rollup-plugin-uglify": "^2.0.1"
