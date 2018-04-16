@@ -65,12 +65,12 @@ var Progress = function () {
         style.borderBottomColor = this.color;
         style.borderLeftColor = this.color;
         style.transform = 'rotate(' + this.leftRotate + 'deg)';
-        style.msTransform = 'rotate(' + this.leftRotate + 'deg)';
+        style.webkitTransform = 'rotate(' + this.leftRotate + 'deg)';
       } else {
         style.borderTopColor = this.color;
         style.borderRightColor = this.color;
         style.transform = 'rotate(' + this.rightRotate + 'deg)';
-        style.msTransform = 'rotate(' + this.rightRotate + 'deg)';
+        style.webkitTransform = 'rotate(' + this.rightRotate + 'deg)';
       }
 
       return _extends({}, style, {
