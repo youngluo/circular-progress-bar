@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../dist/css/div.css">
   <title>circle-progress-bar angularjs</title>
 </head>
-<body>
 
+<body>
+  <div ng-controller="MainCtrl as vm">
+    <circular-progress-bar percent="vm.percent"></circular-progress-bar>
+  </div>
+  <script src="https://cdn.bootcss.com/angular.js/1.6.9/angular.min.js"></script>
+  <script src="../../dist/circular-progress-bar-angularjs.js"></script>
+  <script>
+    angular
+      .module('app', ['circular-progress-bar'])
+      .controller('MainCtrl', function MainCtrl($interval) {
+        var self = this
+        self.percent = 0;
+
+        var timer = $interval(function () {
+          if (self.percent >= 100) {
+            $interval.cancel(timer);
+          } else {
+            self.percent += 5;
+          }
+        }, 50);
+      });
+
+    angular.element(function () {
+      angular.bootstrap(document, ['app']);
+    });
+
+  </script>
 </body>
+
 </html>

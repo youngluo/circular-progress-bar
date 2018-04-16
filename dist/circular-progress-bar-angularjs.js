@@ -4,6 +4,8 @@
 	(global['circular-progress-bar'] = factory());
 }(this, (function () { 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11,18 +13,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Progress = function () {
   function Progress() {
     _classCallCheck(this, Progress);
+
+    this.startRotate = -135;
+    this.endRotate = 45;
+    this.step = 180 / 50;
+    this.reset();
   }
 
   _createClass(Progress, [{
-    key: "$onInit",
+    key: '$onInit',
     value: function $onInit() {
-      this.startRotate = -135;
-      this.endRotate = 45;
-      this.step = 180 / 50;
-      this.reset();
+      this.width = this.width || 130;
+      this.strokeWidth = this.strokeWidth || 5;
+      this.color = this.color || '#fe6e35';
+      this.backgroundColor = this.backgroundColor || '#f3f3f3';
+      this.backgroundStyle = {
+        border: this.strokeWidth + 'px solid ' + this.backgroundColor
+      };
     }
   }, {
-    key: "$onChanges",
+    key: '$onChanges',
     value: function $onChanges(changes) {
       var _changes$percent$curr = changes.percent.currentValue,
           currentValue = _changes$percent$curr === undefined ? 0 : _changes$percent$curr;
@@ -30,6 +40,7 @@ var Progress = function () {
 
       if (currentValue === 0) {
         this.reset();
+        return;
       }
 
       if (currentValue <= 50 && this.rightRotate < this.endRotate) {
@@ -40,41 +51,54 @@ var Progress = function () {
       }
     }
   }, {
-    key: "reset",
+    key: 'reset',
     value: function reset() {
       this.rightRotate = this.startRotate;
       this.leftRotate = this.startRotate;
     }
   }, {
-    key: "getStyle",
-    value: function getStyle(rotate) {
-      return {
-        transform: "rotate(" + rotate + "deg)",
-        webkitTransform: "rotate(" + rotate + "deg)"
-      };
+    key: 'getStyle',
+    value: function getStyle(direction) {
+      var style = {};
+
+      if (direction === 'left') {
+        style.borderBottomColor = this.color;
+        style.borderLeftColor = this.color;
+        style.transform = 'rotate(' + this.leftRotate + 'deg)';
+        style.msTransform = 'rotate(' + this.leftRotate + 'deg)';
+      } else {
+        style.borderTopColor = this.color;
+        style.borderRightColor = this.color;
+        style.transform = 'rotate(' + this.rightRotate + 'deg)';
+        style.msTransform = 'rotate(' + this.rightRotate + 'deg)';
+      }
+
+      return _extends({}, style, {
+        borderWidth: this.strokeWidth + 'px'
+      });
     }
   }]);
 
   return Progress;
 }();
 
-var template = "<div class=\"circular-progress-bar\"><div class=\"circular-progress-bar-half circular-progress-bar-half-left\"><div class=\"circular-progress-bar-half-container\" ng-style=\"$ctrl.getStyle($ctrl.rightRotate)\"></div></div><div class=\"circular-progress-bar-half circular-progress-bar-half-right\"><div class=\"circular-progress-bar-half-container\" ng-style=\"$ctrl.getStyle($ctrl.leftRotate)\"></div></div><div class=\"circular-progress-bar-background\" ng-transclude></div></div>";
+var template = "<div class=\"circular-progress-bar\" ng-style=\"{width: vm.width + 'px', height: vm.width + 'px'}\"><div class=\"circular-progress-bar-half circular-progress-bar-half-right\"><div class=\"circular-progress-bar-half-container\" ng-style=\"vm.getStyle()\"></div></div><div class=\"circular-progress-bar-half circular-progress-bar-half-left\"><div class=\"circular-progress-bar-half-container\" ng-style=\"vm.getStyle('left')\"></div></div><div class=\"circular-progress-bar-background\" ng-style=\"vm.backgroundStyle\" ng-transclude></div></div>";
 
-var name = 'circular-progress-bar';
 var DDO = {
   bindings: {
     percent: '<',
     color: '@',
-    size: '<',
     width: '<',
+    strokeWidth: '<',
     backgroundColor: '@'
   },
+  controllerAs: 'vm',
   transclude: true,
   template: template,
   controller: Progress
 };
 
-var index = angular.module(name, []).component(name, DDO).name;
+var index = angular.module('circular-progress-bar', []).component('circularProgressBar', DDO).name;
 
 return index;
 

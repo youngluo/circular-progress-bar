@@ -1,9 +1,9 @@
-<div class="circular-progress-bar">
-  <div class="circular-progress-bar-half circular-progress-bar-half-left">
-    <div class="circular-progress-bar-half-container" ng-style="$ctrl.getStyle($ctrl.rightRotate)"></div>
-  </div>
+<div class="circular-progress-bar" ng-style="{width: vm.width + 'px', height: vm.width + 'px'}">
   <div class="circular-progress-bar-half circular-progress-bar-half-right">
-    <div class="circular-progress-bar-half-container" ng-style="$ctrl.getStyle($ctrl.leftRotate)"></div>
+    <div class="circular-progress-bar-half-container" ng-style="vm.getStyle()"></div>
   </div>
-  <div class="circular-progress-bar-background" ng-transclude></div>
+  <div class="circular-progress-bar-half circular-progress-bar-half-left">
+    <div class="circular-progress-bar-half-container" ng-style="vm.getStyle('left')"></div>
+  </div>
+  <div class="circular-progress-bar-background" ng-style="vm.backgroundStyle" ng-transclude></div>
 </div>

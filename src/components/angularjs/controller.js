@@ -1,9 +1,19 @@
 export default class Progress {
-  $onInit() {
+  constructor() {
     this.startRotate = -135;
     this.endRotate = 45;
     this.step = 180 / 50;
     this.reset();
+  }
+
+  $onInit() {
+    this.width = this.width || 130;
+    this.strokeWidth = this.strokeWidth || 5;
+    this.color = this.color || '#fe6e35';
+    this.backgroundColor = this.backgroundColor || '#f3f3f3';
+    this.backgroundStyle = {
+      border: `${this.strokeWidth}px solid ${this.backgroundColor}`
+    };
   }
 
   $onChanges(changes) {
@@ -13,6 +23,7 @@ export default class Progress {
 
     if (currentValue === 0) {
       this.reset();
+      return;
     }
 
     if (currentValue <= 50 && this.rightRotate < this.endRotate) {
@@ -28,10 +39,24 @@ export default class Progress {
     this.leftRotate = this.startRotate;
   }
 
-  getStyle(rotate) {
+  getStyle(direction) {
+    const style = {};
+
+    if (direction === 'left') {
+      style.borderBottomColor = this.color;
+      style.borderLeftColor = this.color;
+      style.transform = `rotate(${this.leftRotate}deg)`;
+      style.webkitTransform  = `rotate(${this.leftRotate}deg)`;
+    } else {
+      style.borderTopColor = this.color;
+      style.borderRightColor = this.color;
+      style.transform = `rotate(${this.rightRotate}deg)`;
+      style.webkitTransform  = `rotate(${this.rightRotate}deg)`;
+    }
+
     return {
-      transform: `rotate(${rotate}deg)`,
-      webkitTransform: `rotate(${rotate}deg)`
+      ...style,
+      borderWidth: `${this.strokeWidth}px`
     };
   }
 }

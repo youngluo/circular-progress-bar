@@ -1,21 +1,21 @@
 import controller from './controller';
 import template from './index.html';
 
-const name = 'circular-progress-bar';
 const DDO = {
   bindings: {
     percent: '<',
     color: '@',
-    size: '<',
     width: '<',
+    strokeWidth: '<',
     backgroundColor: '@'
   },
+  controllerAs: 'vm',
   transclude: true,
   template,
   controller
 };
 
 export default angular
-  .module(name, [])
-  .component(name, DDO)
+  .module('circular-progress-bar', [])
+  .component('circularProgressBar', DDO)
   .name;
